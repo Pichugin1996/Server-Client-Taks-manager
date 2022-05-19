@@ -1,34 +1,18 @@
 package com.dimastik.server.dto;
 
-import com.dimastik.server.entity.Task;
+public class TaskRequestDTO {
 
-public class TaskResponseDTO {
-
-    private Long id;
     private Integer userId;
     private String title;
     private String description;
 
-    public TaskResponseDTO(Long id, Integer userId, String title, String description) {
-        this.id = id;
+    public TaskRequestDTO() {
+    }
+
+    public TaskRequestDTO(Integer userId, String title, String description) {
         this.userId = userId;
         this.title = title;
         this.description = description;
-    }
-
-    public TaskResponseDTO(Task task) {
-        this.id = task.getId();
-        this.userId = task.getUserId();
-        this.title = task.getTitle();
-        this.description = task.getDescription();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Integer getUserId() {

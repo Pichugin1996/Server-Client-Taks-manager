@@ -1,11 +1,15 @@
 package com.dimastik.server.controller;
 
 import com.dimastik.server.dto.TaskResponseDTO;
+import com.dimastik.server.dto.UserRequestDTO;
+import com.dimastik.server.entity.Task;
 import com.dimastik.server.service.TaskService;
+import com.dimastik.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class TaskController {
@@ -23,9 +27,23 @@ public class TaskController {
         return "TEST OK";
     }
 
-    @GetMapping("/tasks/{id}")
-    public TaskResponseDTO getTaskById(@PathVariable Long id) {
-        System.out.println("task: " + id);
-        return new TaskResponseDTO(taskService.getTaskById(id));
+    @GetMapping("/tasks")
+    public List<Task> getTaskByUserId(@RequestBody UserRequestDTO userRequestDTO) {
+        return taskService.getTaskByUserId(userRequestDTO.getName(), userRequestDTO.getPassword());
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

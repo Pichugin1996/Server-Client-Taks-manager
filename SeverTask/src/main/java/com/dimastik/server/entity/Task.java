@@ -1,14 +1,15 @@
 package com.dimastik.server.entity;
 
 import javax.persistence.*;
+import java.util.StringJoiner;
 
 @Entity
 @Table(name = "tm_task", schema = "public")
 public class Task {
 
     @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "user_id")
@@ -21,6 +22,12 @@ public class Task {
     private String description;
 
     public Task() {
+    }
+
+    public Task(Integer userId, String title, String description) {
+        this.userId = userId;
+        this.title = title;
+        this.description = description;
     }
 
     public Task(Long id, Integer userId, String title, String description) {
@@ -60,5 +67,15 @@ public class Task {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", Task.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("userId=" + userId)
+                .add("title='" + title + "'")
+                .add("description='" + description + "'")
+                .toString();
     }
 }
